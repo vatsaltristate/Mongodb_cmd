@@ -1,0 +1,105 @@
+Some useful Mongoose cmd
+
+=> show a current database
+
+db
+
+=> show all database list
+
+show dbs
+
+=> create/switch one database to other database
+
+use databasename
+
+=> create a collection in database
+
+db.createCollection('collename')
+
+=> show all collection in database
+
+show collection
+
+=> insert a one data in database
+
+db.databasename.insertOne({
+  title: 'Post 1',
+  body: 'Body of post.',
+  category: 'News',
+  likes: 1,
+  tags: ['news', 'events'],
+  date: Date()
+})
+
+=> insert a multiple data in database
+
+db.databasename.insertMany([
+  {
+    title: 'Post 1',
+    body: 'Body of post.',
+    category: 'Event',
+    likes: 2,
+    tags: ['news', 'events'],
+    date: Date()
+  },
+  {
+    title: 'Post 3',
+    body: 'Body of post.',
+    category: 'Tech',
+    likes: 3,
+    tags: ['news', 'events'],
+    date: Date()
+  }
+
+=> find all records in collection
+
+db.databasename.find()
+
+=> find documentation with query 
+
+db.databasename.find({ category: 'Tech' })
+
+=>  Sorting collection in records
+
+Ascending
+db.databasename.find().sort({ title: 1 })
+Descending
+db.databasename.find().sort({ title: -1 })
+
+=> counting records
+
+conunt collection in all records
+db.databasename.find().count()
+count a perticular feild
+db.posts.find({ category: 'news' }).count()
+
+=> update 
+
+update record
+db.databasename.updateOne({ title: 'Post 1' },
+{
+  $set: {
+    category: 'Tech'
+  }
+})
+
+update record but not exist in collection and create new record
+db.databasename.updateOne({ title: 'Post 6' },
+{
+  $set: {
+    title: 'Post 6',
+    body: 'Body of post.',
+    category: 'News'
+  }
+},
+{
+  upsert: true
+})
+
+=> collection in delete a perticular record
+
+db.databasename.deleteOne({ title: 'Post 7' })
+
+=> delete a multiple records in feild wise
+
+db.databasename.deleteMany({ category: 'Tech' })
